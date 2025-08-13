@@ -36,11 +36,9 @@ public class UsersServiceImp implements UsersService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
 
         user.setName(userDetails.getName());
-        user.setUserName(userDetails.getUserName());
+        user.setUserName(userDetails.getUsername());
         user.setEmail(userDetails.getEmail());
         user.setPassword(userDetails.getPassword());
-        user.setRole(userDetails.getRole());
-
         return usersRepository.save(user);
     }
 

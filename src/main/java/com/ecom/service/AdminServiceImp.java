@@ -38,10 +38,8 @@ public class AdminServiceImp implements AdminService {
 
         admin.setName(adminDetails.getName());
         admin.setEmail(adminDetails.getEmail());
-        admin.setUsername(adminDetails.getUsername());
+        admin.setUserName(adminDetails.getUsername());
         admin.setPassword(adminDetails.getPassword());
-        admin.setRole(adminDetails.getRole());
-
         return adminRepository.save(admin);
     }
 

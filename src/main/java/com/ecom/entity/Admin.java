@@ -1,5 +1,12 @@
 package com.ecom.entity;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "admins") // Optional: to avoid reserved keywords in SQL
-public class Admin{
+public class Admin implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,13 +37,27 @@ public class Admin{
     @NotBlank(message = "Username is required")
     @Size(min = 4, max = 20, message = "Username must be between 4 and 20 characters")
     @Column(unique = true)
-    private String username;
+    private String userName;
 
     @NotBlank(message = "Password is required")
     @Size(min = 8, max = 100, message = "Password must be at least 8 characters")
     private String password;
 
     @NotBlank(message = "Role is required")
+    @Column(nullable=false) 
     private String role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_ADMIN" + this.role.toUpperCase()));
+    }
+
+	@Override
+	public String getUsername() {
+		return this.userName;
+	}
+
+
+
 
 }
