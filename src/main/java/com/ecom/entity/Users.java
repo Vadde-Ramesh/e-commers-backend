@@ -43,11 +43,11 @@ public class Users implements UserDetails{
     private String password;
 
     @Column(nullable=false) 
-    private String role = "ROLE_USER";
+    private String role ;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER" + this.role.toUpperCase()));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + this.role.toUpperCase()));
     }
 
 	@Override

@@ -49,7 +49,7 @@ public class Admin implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_ADMIN" + this.role.toUpperCase()));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + this.role.toUpperCase()));
     }
 
 	@Override

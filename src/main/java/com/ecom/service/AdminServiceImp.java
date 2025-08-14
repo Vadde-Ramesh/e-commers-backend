@@ -6,6 +6,7 @@ import com.ecom.repository.AdminRepository;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +16,13 @@ public class AdminServiceImp implements AdminService {
 
     @Autowired
     private AdminRepository adminRepository;
+    @Autowired
+    private PasswordEncoder password;
 
     // Create Admin
     public Admin save(Admin admin) {
+    	admin.setRole("ROLE_ADMIN");
+    	admin.setPassword(password.encode(admin.getPassword()));
         return adminRepository.save(admin);
     }
 

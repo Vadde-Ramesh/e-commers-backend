@@ -19,7 +19,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtil {
   private String secret  = "VGhpc0lzQVRlc3QyNTZCaXQzMmNoYXJTZWNyZXRHdWFyZCEhISE="; // 256-bit base64 string
  
-  private long expMins = 120 * 1000;
+  private long expMins = 2* 60 * 1000;
 
   private Key key() { return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret)); }
 
